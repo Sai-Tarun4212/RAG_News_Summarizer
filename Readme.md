@@ -101,7 +101,7 @@ A free, AI-powered news summarization app using Retrieval-Augmented Generation (
 
 Your app will be live at `https://your-app.streamlit.app` in ~5-10 minutes!
 
-## 🔑 Getting Free API Keys
+## 🔑 Getting Free API Keys.
 
 ### NewsAPI (Recommended)
 1. Go to https://newsapi.org/register

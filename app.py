@@ -267,7 +267,6 @@ def main():
             with st.spinner("Analyzing articles..."):
                 # Load model
                 model = load_embedding_model()
-
                 query_embedding = model.encode([query])
                 similarities = np.dot(st.session_state.embeddings, query_embedding.T).flatten()
                 top_indices = np.argsort(similarities)[-top_k:][::-1]
