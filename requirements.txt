@@ -1,9 +1,6 @@
+# Only 5 packages
 streamlit==1.29.0
 beautifulsoup4==4.12.3
 requests==2.31.0
-numpy==1.26.0
 python-dotenv==1.0.0
 lxml==5.1.0
-torch>=2.2.0
-sentence-transformers>=2.2.2
-transformers>=4.35.0
