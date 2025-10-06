@@ -1,7 +1,7 @@
 
 import streamlit as st
 import requests
-import feedparser
+import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 import numpy as np
 from bs4 import BeautifulSoup
@@ -80,28 +80,48 @@ def fetch_news_newsapi(topic, days=7):
 
 @st.cache_data(ttl=3600)
 def fetch_news_rss(topic):
-    feeds = [
+
+    print(f"\n🔍 Fetching news about '{topic}' from RSS feeds (100% FREE)...")
+
+    # Free RSS feeds from major news sources
+    rss_feeds = [
         f"https://news.google.com/rss/search?q={topic}&hl=en-US&gl=US&ceid=US:en",
     ]
 
     articles = []
-    for feed_url in feeds:
+    for feed_url in tqdm(rss_feeds, desc="Fetching from RSS feeds"):
         try:
-            feed = feedparser.parse(feed_url)
-            for entry in feed.entries[:30]:
+            response = requests.get(feed_url, timeout=10)
+            response.raise_for_status()
+
+            # Parse XML
+            root = ET.fromstring(response.content)
+
+            # Find all items (articles)
+            for item in root.findall('.//item'):
+                title_elem = item.find('title')
+                link_elem = item.find('link')
+                desc_elem = item.find('description')
+                pub_elem = item.find('pubDate')
+
                 article = {
-                    'title': entry.get('title', ''),
-                    'description': entry.get('summary', ''),
-                    'url': entry.get('link', ''),
-                    'publishedAt': entry.get('published', ''),
+                    'title': title_elem.text if title_elem is not None else '',
+                    'description': desc_elem.text if desc_elem is not None else '',
+                    'url': link_elem.text if link_elem is not None else '',
+                    'publishedAt': pub_elem.text if pub_elem is not None else '',
                     'source': {'name': 'Google News'}
                 }
-                articles.append(article)
-        except:
+
+                if article['title']:  # Only add if has title
+                    articles.append(article)
+
+            time.sleep(1)  # Be polite
+        except Exception as e:
+            print(f"⚠️ Error with feed: {e}")
             continue
 
+    print(f"✅ Found {len(articles)} articles from RSS feeds")
     return articles, None
-
 
 def summarize_with_huggingface(text, max_length=130):
     if not HUGGINGFACE_TOKEN:
