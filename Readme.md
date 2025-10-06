@@ -2,7 +2,7 @@
 
 A free, AI-powered news summarization app using Retrieval-Augmented Generation (RAG). Get instant summaries of the latest news on any topic!
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://your-app.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ragnewssummary.streamlit.app)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -17,7 +17,7 @@ A free, AI-powered news summarization app using Retrieval-Augmented Generation (
 
 ## 🚀 Live Demo
 
-**Try it now:** [https://your-app.streamlit.app](https://your-app.streamlit.app)
+**Try it now:** [https://your-app.streamlit.app](https://ragnewssummary.streamlit.app/)
 
 ## 🛠️ Tech Stack
 
